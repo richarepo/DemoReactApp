@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   margin: 20px 10px;
-  max-width: 100px;
+  max-width: 210px;
   transition: 0.5s;
   @media(max-width:500px){
     max-width: 155px;
