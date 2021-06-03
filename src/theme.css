@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+::-webkit-scrollbar{
+  width: 0px;
+}
+
 [data-theme="dark"] {
   --bg-color: #050505;
   --text-color: #fff;
