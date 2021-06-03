@@ -5,6 +5,7 @@ const Container = styled.div`
   margin: 20px 10px;
   max-width: 210px;
   transition: 0.5s;
+  cursor: pointer;
   @media(max-width:500px){
     max-width: 155px;
     margin: 10px 5px;
@@ -65,10 +66,10 @@ const Percentage = styled.div`
   font-weight: bold;
 `;
 
-function BookCard({ book, darkMode }) {
+function BookCard({ book, darkMode, setOpenBookDetail }) {
 
   return (
-    <Container>
+    <Container onClick={() => setOpenBookDetail(book)}>
       <ImageWrapper>
         <Percentage darkMode={darkMode}>{book.percentage}</Percentage>
         <Image src={book.image} />

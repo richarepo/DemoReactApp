@@ -41,7 +41,7 @@ var deskTopColumn = [
     width: 320,
     suppressSizeToFit: true,
     sortable: makeSortable,
-    unSortIcon: true,    
+    unSortIcon: true,
     cellRendererFramework: TitleRender
   },
   {
@@ -83,11 +83,12 @@ var phoneColumn = [
   },
 ];
 
-function BookList({ books, darkMode, openBookDetail }) {
+function BookList({ books, darkMode, openBookDetail, setOpenBookDetail }) {
 
   return (
     <div className="ag-theme-alpine" style={{ width: '100%', height: '100vh' }}>
       <AgGridReact
+        onRowClicked={(e) => setOpenBookDetail(e.data)}
         rowData={books}
         rowHeight={rowHeight}
         animateRows="true"

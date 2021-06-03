@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import BookCard from './Common/BookCard';
+import BookDetailPopup from './Common/BookDetailPopup';
 import BookList from './Common/BookList';
 
 const Container = styled.div`
@@ -69,6 +70,7 @@ function BookContainer({ darkMode, listView }) {
 
   const [books, setBooks] = useState([]);
   const [fetchedData, setFetched] = useState(false);
+  const [openBookDetail, setOpenBookDetail] = useState('');
 
   const getBooks = (search) => {
     fetch('book.json', {
@@ -113,6 +115,9 @@ function BookContainer({ darkMode, listView }) {
 
   return (
     <Container>
+      {!!openBookDetail &&
+        <BookDetailPopup darkMode={darkMode} book={openBookDetail} handleClose={() => setOpenBookDetail('')} />
+      }
       <InputDiv darkMode={darkMode}>
         <InputWrapper>
           <SearchIcon className="fa fa-search" aria-hidden="true" style={{ cursor: 'pointer', color: darkMode ? "#fff" : "#8F8F8F" }} />
@@ -120,9 +125,9 @@ function BookContainer({ darkMode, listView }) {
         </InputWrapper>
       </InputDiv>
       <AllBooks>
-        {!!books && books.length > 0 ? listView ? <BookList books={books} darkMode={darkMode} /> :
+        {!!books && books.length > 0 ? listView ? <BookList books={books} darkMode={darkMode} setOpenBookDetail={book => setOpenBookDetail(book)} /> :
           books.map((book, i) => {
-            return <BookCard key={i} book={book} darkMode={darkMode} />
+            return <BookCard key={i} book={book} darkMode={darkMode} setOpenBookDetail={book => setOpenBookDetail(book)} />
           })
           :
           fetchedData && <NotFoundText>404 Not Found.</NotFoundText>

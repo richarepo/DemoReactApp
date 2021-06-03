@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 0px;
 }
 
@@ -14,7 +14,7 @@
   height: 100%;
 }
 
-[data-theme="dark"] .ag-header-viewport, [data-theme="dark"] .ag-root, [data-theme="dark"] .ag-row, [data-theme="dark"] .ag-header-row, [data-theme="dark"] .ag-header-cell-text, [data-theme="dark"] .ag-header-icon {
+[data-theme="dark"] .ag-header-viewport, [data-theme="dark"] .ag-root, [data-theme="dark"] .ag-row, [data-theme="dark"] .ag-header-row, [data-theme="dark"] .ag-header-cell-text, [data-theme="dark"] .ag-header-icon, [data-theme="dark"] .product-popup {
   background-color: #000 !important;
   color: #fff;
 }
