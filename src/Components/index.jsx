@@ -33,6 +33,9 @@ const Input = styled.input`
 const AllBooks = styled.div`
   display: flex;
   flex-wrap: wrap;
+  @media(max-width:500px){
+    justify-content: center;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -65,6 +68,7 @@ const NotFoundText = styled.div`
 function BookContainer({ darkMode, listView }) {
 
   const [books, setBooks] = useState([]);
+  const [fetchedData, setFetched] = useState(false);
 
   const getBooks = (search) => {
     fetch('book.json', {
@@ -82,6 +86,7 @@ function BookContainer({ darkMode, listView }) {
       } else {
         setBooks(myJson.books);
       }
+      setFetched(true)
     });
   }
 
@@ -120,7 +125,7 @@ function BookContainer({ darkMode, listView }) {
             return <BookCard key={i} book={book} darkMode={darkMode} />
           })
           :
-          <NotFoundText>404 Not Found.</NotFoundText>
+          fetchedData && <NotFoundText>404 Not Found.</NotFoundText>
         }
       </AllBooks>
     </Container>

@@ -3,8 +3,12 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   margin: 20px 10px;
-  max-width: 210px;
+  max-width: 100px;
   transition: 0.5s;
+  @media(max-width:500px){
+    max-width: 155px;
+    margin: 10px 5px;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -15,6 +19,10 @@ const Image = styled.img`
   height: 340px;
   width: 100%;
   border-radius: 30px;
+  @media(max-width:500px){
+    height: 250px;
+    width: 155px;
+  }
 `;
 
 const BookTitle = styled.div`
@@ -39,6 +47,11 @@ const Category = styled.div`
   background: ${props => props.darkMode ? 'rgba(28, 27, 26, 0.7)' : 'rgba(238, 234, 233, 0.7)'};
   font-weight: bold;
   text-align: right;
+  @media(max-width:500px){
+    font-size: 11px;
+    font-weight: normal;
+    right: 5px;
+  }
 `;
 
 const Percentage = styled.div`
