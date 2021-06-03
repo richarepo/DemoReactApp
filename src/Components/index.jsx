@@ -7,6 +7,7 @@ import BookList from './Common/BookList';
 const Container = styled.div`
   padding: 20px;
   box-sizing: border-box;
+  min-height: 100vh;
 `;
 
 const InputDiv = styled.div`
