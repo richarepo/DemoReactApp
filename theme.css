@@ -1,0 +1,68 @@
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  height: 100%;
+}
+
+[data-theme="dark"] {
+  --bg-color: #050505;
+  --text-color: #fff;
+  height: 100%;
+}
+
+[data-theme="dark"] .ag-header-viewport, [data-theme="dark"] .ag-root, [data-theme="dark"] .ag-row, [data-theme="dark"] .ag-header-row, [data-theme="dark"] .ag-header-cell-text, [data-theme="dark"] .ag-header-icon {
+  background-color: #000 !important;
+  color: #fff;
+}
+
+[data-theme="dark"] .list-wrapper {
+  color: #fff;
+}
+
+.ag-header-viewport {
+  background-color: #FFF !important;
+}
+
+.ag-header-cell-text {
+  color: #8F8F8F;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.ag-header, .ag-root-wrapper, .ag-row {
+  border: none !important;
+  background-color: #FFF !important;
+}
+
+.App {
+  font-family: sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.modebutton {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 10px;
+  margin-right: 30px;
+  color: white;
+  z-index: 2;
+  /* position: fixed; */
+}
+
+.fa {
+  font-size: 30px;
+}
+
+.sun {
+  font-size: 30px
+}
+
+#moon {
+  font-size: large;
+  color: black;
+  font-size: 30px;
+}
