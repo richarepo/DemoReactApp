@@ -11,13 +11,13 @@ const Container = styled.div`
 `;
 
 const Image = styled.img`
-  width: 40%;
-  height: 320px;
+  width: 210px;
+  max-height: 260px;
   border-radius: 15px;
   margin-bottom: 20px;
   @media(max-width: 500px){
     height: 180px;
-    width: 33%;
+     width: 110px;
   }
 `;
 
@@ -83,23 +83,23 @@ function BookDetailPopup({ handleClose, book, darkMode }) {
   return (
     <PopUp
       onClose={handleClose}
-      width={window.innerWidth < 468 ? 468 : 650}
+      width={window.innerWidth < 468 ? 468 : 600}
     >
       <Container>
         <Image src={book.image} />
         <BookDetails>
           <Title>{book.title} </Title>
           <Author> {book.author}</Author>
-          {!!book && !!book.description && book.description.length > 250 ?
+          {!!book && !!book.description && book.description.length > 170 ?
             <Description>
-              {book.description.substring(0, 250)}..
+              {book.description.substring(0, 170)}..
             </Description> :
             <Description> {book.description} </Description>
           }
         </BookDetails>
         <Buttons>
           <CloseButton darkMode={darkMode} onClick={handleClose}>Close</CloseButton>
-          <ContinueButton>Continue Reading</ContinueButton>
+          <ContinueButton onClick={handleClose}>Continue Reading</ContinueButton>
         </Buttons>
       </Container>
     </PopUp>
