@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import BookImageTitleWrapper from './BookImageTitleWrapper';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';

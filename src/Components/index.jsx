@@ -65,7 +65,6 @@ const NotFoundText = styled.div`
 function BookContainer({ darkMode, listView }) {
 
   const [books, setBooks] = useState([]);
-  const [changeView, setChangeView] = useState(listView);
 
   const getBooks = (search) => {
     fetch('book.json', {
@@ -88,6 +87,7 @@ function BookContainer({ darkMode, listView }) {
 
   useEffect(() => {
     getBooks();
+    // eslint-disable-next-line
   }, []);
 
   const searchBooks = (search, books) => {
@@ -96,6 +96,7 @@ function BookContainer({ darkMode, listView }) {
         book.author.toLowerCase().includes(search) ||
         book.category.toLowerCase().includes(search)
       ) return true;
+      return false;
     });
     return filteredBooks;
   }
