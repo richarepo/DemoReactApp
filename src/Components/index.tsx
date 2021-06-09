@@ -1,8 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import BookCard from './Common/BookCard';
 import BookDetailPopup from './Common/BookDetailPopup';
 import BookList from './Common/BookList';
+
+
+interface IProps {
+  darkMode: string,
+  listView: boolean
+}
+
+interface BookIProp {
+  isbn: number,
+  title: string,
+  subtitle: string,
+  author: string,
+  published: string,
+  publisher: string,
+  pages: number,
+  category: string,
+  percentage: string,
+  description: string,
+  website: string,
+  image: string,
+  lastOpened: string
+}
+
 
 const Container = styled.div`
   padding: 20px;
@@ -17,13 +40,13 @@ const InputDiv = styled.div`
   padding-bottom: 20px;
 `;
 
-const Input = styled.input`
+const Input: any = styled.input`
   padding: 14px 10px 14px 40px;
   box-sizing: border-box;
   border: none;
-  background: ${props => props.darkMode ? '#000' : '#fff'};
-  color: ${props => props.darkMode ? '#fff' : '#000'};
-  border: ${props => props.darkMode ? '1px solid #fff' : '1px solid #D4D8DA'};
+  background: ${(props: any) => props.darkMode ? '#000' : '#fff'};
+  color: ${(props: any) => props.darkMode ? '#fff' : '#000'};
+  border: ${(props: any) => props.darkMode ? '1px solid #fff' : '1px solid #D4D8DA'};
   font-size: 16px;
   border-radius: 12px;
   &:focus {
@@ -35,6 +58,7 @@ const Input = styled.input`
 const AllBooks = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   @media(max-width:500px){
     justify-content: center;
   }
@@ -67,13 +91,13 @@ const NotFoundText = styled.div`
   font-size: 16px;
 `;
 
-function BookContainer({ darkMode, listView }) {
+function BookContainer(props: IProps) {
 
   const [books, setBooks] = useState([]);
   const [fetchedData, setFetched] = useState(false);
   const [openBookDetail, setOpenBookDetail] = useState('');
 
-  const getBooks = (search) => {
+  const getBooks = (search?: string) => {
     fetch('book.json', {
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +108,7 @@ function BookContainer({ darkMode, listView }) {
       return response.json();
     }).then(function (myJson) {
       if (search) {
-        const resp = searchBooks(search, myJson.books);
+        const resp: any = searchBooks(search, myJson.books);
         setBooks(resp);
       } else {
         setBooks(myJson.books);
@@ -98,18 +122,18 @@ function BookContainer({ darkMode, listView }) {
     // eslint-disable-next-line
   }, []);
 
-  const searchBooks = (search, books) => {
-    const filteredBooks = books.filter(book => {
-      if (book.title.toLowerCase().includes(search) ||
-        book.author.toLowerCase().includes(search) ||
-        book.category.toLowerCase().includes(search)
+  const searchBooks = (search: string, books: BookIProp[]) => {
+    const filteredBooks = books.filter((book: any) => {
+      if (book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.author.toLowerCase().includes(search.toLowerCase()) ||
+        book.category.toLowerCase().includes(search.toLowerCase())
       ) return true;
       return false;
     });
     return filteredBooks;
   }
 
-  const filterBooks = async (e) => {
+  const filterBooks = async (e: any) => {
     const value = e.target.value;
     await getBooks(value)
   }
@@ -117,18 +141,18 @@ function BookContainer({ darkMode, listView }) {
   return (
     <Container>
       {!!openBookDetail &&
-        <BookDetailPopup darkMode={darkMode} book={openBookDetail} handleClose={() => setOpenBookDetail('')} />
+        <BookDetailPopup darkMode={props.darkMode} book={openBookDetail} handleClose={setOpenBookDetail} />
       }
-      <InputDiv darkMode={darkMode}>
+      <InputDiv>
         <InputWrapper>
-          <SearchIcon className="fa fa-search" aria-hidden="true" style={{ cursor: 'pointer', color: darkMode ? "#fff" : "#8F8F8F" }} />
-          <Input darkMode={darkMode} placeholder="Search book by name, author.." onChange={filterBooks} />
+          <SearchIcon className="fa fa-search" aria-hidden="true" style={{ cursor: 'pointer', color: props.darkMode ? "#fff" : "#8F8F8F" }} />
+          <Input darkMode={props.darkMode} placeholder="Search book by name, author.." onChange={filterBooks} />
         </InputWrapper>
       </InputDiv>
       <AllBooks>
-        {!!books && books.length > 0 ? listView ? <BookList books={books} darkMode={darkMode} setOpenBookDetail={book => setOpenBookDetail(book)} /> :
+        {!!books && books.length > 0 ? props.listView ? <BookList books={books} setOpenBookDetail={setOpenBookDetail} /> :
           books.map((book, i) => {
-            return <BookCard key={i} book={book} darkMode={darkMode} setOpenBookDetail={book => setOpenBookDetail(book)} />
+            return <BookCard key={i} book={book} darkMode={props.darkMode} setOpenBookDetail={setOpenBookDetail} />
           })
           :
           fetchedData && <NotFoundText>404 Not Found.</NotFoundText>

@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components';
 import { AgGridReact } from 'ag-grid-react';
 import BookImageTitleWrapper from './BookImageTitleWrapper';
@@ -6,19 +5,25 @@ import BookImageTitleWrapper from './BookImageTitleWrapper';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
+interface IProps {
+  books: any,
+  setOpenBookDetail: any
+}
+
 const Title = styled.div`
   font-weight: bold;
   font-size: 14px;
-  color: #8F8F8F;
+  // color: #8F8F8F;
+  opacity: 0.5;
   height: 100px;
   display: flex;
+  cursor: pointer;
   align-items: center;
 `;
 
-const TitleRender = (props) => <Title>{props.value}</Title>;
+const TitleRender = (props: any) => <Title>{props.value}</Title>;
 
-
-const rightalign = { textAlign: 'right' };
+const rightalign = { justifyContent: 'center', display: 'flex', border: 'none' };
 const staticstyle = { border: 'none' };
 
 const rowHeight = 120;
@@ -26,72 +31,72 @@ const makeSortable = true;
 
 var deskTopColumn = [
   {
-    headerName: 'Book title & Author',
+    width: 430,
     field: 'title',
-    width: 440,
-    suppressSizeToFit: true,
+    unSortIcon: true,
     sortable: makeSortable,
     cellStyle: staticstyle,
-    unSortIcon: true,
+    suppressSizeToFit: true,
+    headerName: 'Book title & Author',
     cellRendererFramework: BookImageTitleWrapper
-  },
-  {
-    headerName: 'Genre',
-    field: 'category',
-    width: 320,
-    suppressSizeToFit: true,
-    sortable: makeSortable,
-    unSortIcon: true,
-    cellRendererFramework: TitleRender
-  },
-  {
-    headerName: 'Reading Progress',
-    field: 'percentage',
+  }, {
     width: 310,
-    suppressSizeToFit: true,
-    sortable: makeSortable,
     unSortIcon: true,
-    cellRendererFramework: TitleRender
-  },
-  {
-    headerName: 'Last Opened',
-    field: 'lastOpened',
-    width: 315,
-    suppressSizeToFit: true,
+    field: 'category',
+    headerName: 'Genre',
     sortable: makeSortable,
+    cellStyle: staticstyle,
+    suppressSizeToFit: true,
+    cellRendererFramework: TitleRender
+  }, {
+    width: 300,
+    unSortIcon: true,
+    field: 'percentage',
+    cellStyle: staticstyle,
+    sortable: makeSortable,
+    suppressSizeToFit: true,
+    headerName: 'Reading Progress',
+    cellRendererFramework: TitleRender
+  }, {
+    width: 215,
     sort: 'asc',
+    field: 'lastOpened',
+    sortable: makeSortable,
+    cellStyle: staticstyle,
+    suppressSizeToFit: true,
+    headerName: 'Last Opened',
     cellRendererFramework: TitleRender
   }
 ];
 
 var phoneColumn = [
   {
-    headerName: 'Book title & Author',
+    width: 180,
     field: 'title',
-    width: 300,
+    sortable: makeSortable,
     suppressSizeToFit: true,
-    sortable: makeSortable,
+    headerName: 'Book title & Author',
     cellRendererFramework: BookImageTitleWrapper
-  },
-  {
-    headerName: 'Reading Progress',
+  },{
+    width: 140,
     field: 'percentage',
-    width: 200,
-    sortable: makeSortable,
     cellStyle: rightalign,
+    sortable: makeSortable,
+    headerName: 'Reading Progress',
     cellRendererFramework: TitleRender
-  },
+  }
 ];
 
-function BookList({ books, darkMode, openBookDetail, setOpenBookDetail }) {
+function BookList(props: IProps) {
+  const animateRows: boolean = true
 
   return (
     <div className="ag-theme-alpine" style={{ width: '100%', height: '80vh' }}>
       <AgGridReact
-        onRowClicked={(e) => setOpenBookDetail(e.data)}
-        rowData={books}
+        onRowClicked={(e) => props.setOpenBookDetail(e.data)}
+        rowData={props.books}
         rowHeight={rowHeight}
-        animateRows="true"
+        animateRows={animateRows}
         columnDefs={window.innerWidth < 600 ? phoneColumn : deskTopColumn}
       >
       </AgGridReact>

@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Image = styled.img`
@@ -28,10 +28,11 @@ const Author = styled.div`
   color: #8F8F8F;
 `;
 
-function BookImageTitleWrapper(props) {
+function BookImageTitleWrapper(props: any) {
   const { data } = props;
+
   return (
-    <Container className="list-wrapper">
+    <Container>
       <Image src={data.image} />
       <TitleAndAuthorWrapper>
         <Title>{data.title} </Title>

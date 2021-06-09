@@ -1,6 +1,11 @@
-import React from 'react'
 import styled from 'styled-components';
 import PopUp from './Popup'
+
+interface IProps {
+  book: any,
+  handleClose: any,
+  darkMode: string
+}
 
 const Container = styled.div`
   padding: 10px 20px;
@@ -12,17 +17,18 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: 210px;
+  margin-top: 30px;
   max-height: 260px;
+  min-height: 260px;
   border-radius: 15px;
   margin-bottom: 20px;
   @media(max-width: 500px){
     height: 180px;
-     width: 110px;
+    width: 110px;
   }
 `;
 
 const BookDetails = styled.div`
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +37,9 @@ const BookDetails = styled.div`
 const Title = styled.div`
   font-weight: bold;
   font-size: 22px;
+  @media(max-width: 500px){
+    font-size: 20px;
+  }
 `;
 
 const Author = styled.div`
@@ -57,14 +66,18 @@ const Buttons = styled.div`
   margin-top: 35px;
 `;
 
-const CloseButton = styled.button`
+const CloseButton: any = styled.button`
   padding: 15px 30px;
   font-size: 16px;
-  background: ${props => props.darkMode ? '#0A1D28' : '#E0EAF2'};
-  color: ${props => props.darkMode ? '#fff' : '#000'};
+  background: ${(props: any) => props.darkMode ? '#0A1D28' : '#E0EAF2'};
+  color: ${(props: any) => props.darkMode ? '#fff' : '#000'};
   border: none;
   border-radius: 10px;
   width: 30%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  outline: none;
 `;
 
 const ContinueButton = styled.button`
@@ -77,29 +90,32 @@ const ContinueButton = styled.button`
   width: 70%;
   margin-left: 10px;
   outline: none;
+  @media (max-width: 500px) {
+    padding: 5px 30px;
+  }
 `;
 
-function BookDetailPopup({ handleClose, book, darkMode }) {
+function BookDetailPopup(props: IProps) {
   return (
     <PopUp
-      onClose={handleClose}
+      onClose={props.handleClose}
       width={window.innerWidth < 468 ? 468 : 600}
     >
       <Container>
-        <Image src={book.image} />
+        <Image src={props.book.image} />
         <BookDetails>
-          <Title>{book.title} </Title>
-          <Author> {book.author}</Author>
-          {!!book && !!book.description && book.description.length > 170 ?
+          <Title>{props.book.title} </Title>
+          <Author> {props.book.author}</Author>
+          {!!props.book && !!props.book.description && props.book.description.length > 170 ?
             <Description>
-              {book.description.substring(0, 170)}..
+              {props.book.description.substring(0, 170)}..
             </Description> :
-            <Description> {book.description} </Description>
+            <Description> {props.book.description} </Description>
           }
         </BookDetails>
         <Buttons>
-          <CloseButton darkMode={darkMode} onClick={handleClose}>Close</CloseButton>
-          <ContinueButton onClick={handleClose}>Continue Reading</ContinueButton>
+          <CloseButton darkMode={props.darkMode} onClick={() => props.handleClose()}>Close</CloseButton>
+          <ContinueButton onClick={() => props.handleClose()}>Continue Reading</ContinueButton>
         </Buttons>
       </Container>
     </PopUp>

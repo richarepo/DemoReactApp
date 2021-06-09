@@ -1,5 +1,16 @@
-import React from 'react';
 import styled from 'styled-components';
+
+interface IProps {
+  book: {
+    title: string,
+    image: string,
+    author: string,
+    category: string,
+    percentage: string
+  },
+  darkMode: string,
+  setOpenBookDetail: any
+}
 
 const Container = styled.div`
   margin: 20px 10px;
@@ -38,16 +49,16 @@ const BookAuthor = styled.div`
   font-weight: bold;
 `;
 
-const Category = styled.div`
+const Category: any = styled.div`
   position: absolute;
   bottom: 10px;
   right: 15px;
   background: #BCADAA;
   padding: 10px 20px;
   border-radius: 10px;
-  background: ${props => props.darkMode ? 'rgba(28, 27, 26, 0.7)' : 'rgba(238, 234, 233, 0.7)'};
   font-weight: bold;
   text-align: right;
+  background: ${(props: any) => props.darkMode ? 'rgba(28, 27, 26, 0.7)' : 'rgba(238, 234, 233, 0.7)'};
   @media(max-width:500px){
     font-size: 11px;
     font-weight: normal;
@@ -55,28 +66,28 @@ const Category = styled.div`
   }
 `;
 
-const Percentage = styled.div`
-  position: absolute;
+const Percentage: any = styled.div`
   top: 10px;
   left: 15px;
-  background: #BCADAA;
   padding: 8px 15px;
-  border-radius: 10px;
-  background: ${props => props.darkMode ? 'rgba(28, 27, 26, 0.7)' : 'rgba(238, 234, 233, 0.7)'};
   font-weight: bold;
+  position: absolute;
+  background: #BCADAA;
+  border-radius: 10px;
+  background: ${(props: any) => props.darkMode ? 'rgba(28, 27, 26, 0.7)' : 'rgba(238, 234, 233, 0.7)'};
 `;
 
-function BookCard({ book, darkMode, setOpenBookDetail }) {
+function BookCard(props: IProps) {
 
   return (
-    <Container onClick={() => setOpenBookDetail(book)}>
+    <Container onClick={() => props.setOpenBookDetail(props.book)}>
       <ImageWrapper>
-        <Percentage darkMode={darkMode}>{book.percentage}</Percentage>
-        <Image src={book.image} />
-        <Category darkMode={darkMode}>{book.category}</Category>
+        <Percentage darkMode={props.darkMode}>{props.book.percentage}</Percentage>
+        <Image src={props.book.image} />
+        <Category darkMode={props.darkMode}>{props.book.category}</Category>
       </ImageWrapper>
-      <BookTitle>{book.title}</BookTitle>
-      <BookAuthor>{book.author}</BookAuthor>
+      <BookTitle>{props.book.title}</BookTitle>
+      <BookAuthor>{props.book.author}</BookAuthor>
     </Container>
   )
 }
